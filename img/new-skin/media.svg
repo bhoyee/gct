@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="145" height="96" viewBox="0 0 145 96">
+  <g id="Group_352" data-name="Group 352" transform="translate(-792 -2238)">
+    <g id="Rectangle_52" data-name="Rectangle 52" transform="translate(792 2238)" fill="#fff" stroke="#c9c9c9" stroke-width="0.5">
+      <rect width="145" height="96" rx="5" stroke="none"/>
+      <rect x="0.25" y="0.25" width="144.5" height="95.5" rx="4.75" fill="none"/>
+    </g>
+    <g id="playlist_1_" data-name="playlist (1)" transform="translate(844.756 2266.706)">
+      <g id="Group_45" data-name="Group 45" transform="translate(0 10.09)">
+        <g id="Group_44" data-name="Group 44">
+          <path id="Path_89" data-name="Path 89" d="M39.014,128.533H1.177A1.178,1.178,0,0,0,0,129.71v27.747a1.178,1.178,0,0,0,1.177,1.177H39.014a1.178,1.178,0,0,0,1.177-1.177V129.71A1.178,1.178,0,0,0,39.014,128.533ZM26.74,144.564l-9.459,6.306a1.177,1.177,0,0,1-1.831-.98V137.278a1.177,1.177,0,0,1,1.831-.98L26.74,142.6a1.177,1.177,0,0,1,0,1.959Z" transform="translate(0 -128.533)" fill="#646464"/>
+        </g>
+      </g>
+      <g id="Group_47" data-name="Group 47" transform="translate(3.784 5.045)">
+        <g id="Group_46" data-name="Group 46">
+          <path id="Path_90" data-name="Path 90" d="M79.648,64.268H49.378a1.177,1.177,0,0,0,0,2.355H79.648a1.177,1.177,0,0,0,0-2.355Z" transform="translate(-48.201 -64.268)" fill="#646464"/>
+        </g>
+      </g>
+      <g id="Group_49" data-name="Group 49" transform="translate(7.567)">
+        <g id="Group_48" data-name="Group 48">
+          <path id="Path_91" data-name="Path 91" d="M120.279,0h-22.7a1.177,1.177,0,1,0,0,2.355h22.7a1.177,1.177,0,1,0,0-2.355Z" transform="translate(-96.4)" fill="#646464"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

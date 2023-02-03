@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="275" height="176" viewBox="0 0 275 176">
+  <g id="Group_358" data-name="Group 358" transform="translate(-2018 -2340)">
+    <g id="Guests" transform="translate(2017.934 2340)">
+      <g id="Base" transform="translate(0.066)" fill="#fff" stroke="#c9c9c9" stroke-miterlimit="10" stroke-width="1">
+        <rect width="275" height="176" rx="5" stroke="none"/>
+        <rect x="0.5" y="0.5" width="274" height="175" rx="4.5" fill="none"/>
+      </g>
+    </g>
+    <text id="Our_Teminal" data-name="Our Teminal" transform="translate(2102 2468)" fill="#464646" font-size="17" font-family="Poppins-SemiBold, Poppins" font-weight="600"><tspan x="0" y="0">Our Teminal</tspan></text>
+    <g id="location_1_" data-name="location (1)" transform="translate(2124.24 2377.295)">
+      <path id="Path_74" data-name="Path 74" d="M50.894,84.289H37.6a80.66,80.66,0,0,1-5.852,8.1,80.658,80.658,0,0,1-5.852-8.1H12.6L6.306,100.782H57.185Z" transform="translate(-6.306 -49.905)" fill="#dfeef4"/>
+      <path id="Path_75" data-name="Path 75" d="M46.831,6.31A13.542,13.542,0,0,0,33.29,19.851c-.079,12.92,13.541,28.944,13.541,28.944S60.451,32.771,60.372,19.851A13.542,13.542,0,0,0,46.831,6.31Zm0,19.287a5.745,5.745,0,1,1,5.745-5.745A5.745,5.745,0,0,1,46.831,25.6Z" transform="translate(-21.391 -6.31)" fill="#f45858"/>
+      <path id="Path_76" data-name="Path 76" d="M66,88.113l-25.389,9.03L30.72,84.29h8.823a80.581,80.581,0,0,0,5.851,8.1,80.584,80.584,0,0,0,5.851-8.1h13.3Z" transform="translate(-19.955 -49.906)" fill="#f2da30"/>
+      <path id="Path_77" data-name="Path 77" d="M29.96,110.36l25.132-8.94,6.88,8.94Z" transform="translate(-19.53 -59.482)" fill="#3ea2e5"/>
+    </g>
+  </g>
+</svg>

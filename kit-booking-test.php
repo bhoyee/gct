@@ -1,0 +1,907 @@
+<?php require 'partials/_functions.php';
+include("session_timeout.php");
+
+ $conn = db_connect();
+ session_start();
+ if(!isset($_SESSION['route']) && empty($_SESSION['route'])) {
+
+    $script = "<script>
+    window.location = 'index.php';</script>";
+    echo $script;
+    exit();
+}
+
+?>
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from chiscotransport.com.ng/Charter by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 26 Jan 2022 06:13:11 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>
+    Giddy Transport
+    </title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta name="keywords" content="Book a Bus, Bus Tickets, E-Ticket, Bus Booking, Book Online, Online Bus Booking In Nigeria, book bus tickets nigeria, Book Online Nigeria, Book Online West Africa, " />
+    <meta name="description" content="Book your bus tickets online on CHISCOTransport.com.ng and get upto 15% discounts on your return booking.">
+    <meta name="author" content="www.voicyreel.com">
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.css">
+    <!-- css frame works -->
+    <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/new-skin/responsive.css">
+    <link href="css/previousStyle.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="css/new-skin/style.css">
+    <link rel="stylesheet" type="text/css" href="css/new-skin/bootstrap-datepicker.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&amp;family=Work+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link href="css/i-check.css" rel="stylesheet" />
+    <link href="css/mystyles.css" rel="stylesheet" />
+    <link href="css/bootstrap-select.min.css" rel="stylesheet" />
+    <style type="text/css">
+        :root {
+            --animate-duration: 800ms;
+            --animate-delay: 10s;
+        }
+    </style>
+    
+</head>
+<body>
+
+
+<div id="header">
+    <div class="container">
+        <nav class="navbar navbar-default" style="margin-top: 2%">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-2">
+                        <div class="navbar-header">
+
+                            <a class="navbar-brand" href="index.php">
+                                <img src="img/new-skin/chisco_logo.png" width="100px" class="logom" style="margin-top: -10px">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xs-10">
+                        <div class="collapse navbar-collapse slimmenu-menu-collapser" id="bs-example-navbar-collapse-1" style="text-align: right">
+
+                            <ul class="slimmenu" id="slimmenus">
+                            <?php
+       
+       if(isset($_SESSION['email'])) { ?>
+           
+           <li><a href="https://giddycruisetransportation.com">Home</a></li>
+           <li><a href="dashb.php">Dashboard</a></li>
+              
+           <li>
+               <a>Manage Booking</a>
+               <ul>
+                   <li><a class="no-child" href="BookingReference.php">Booking Status</a></li>
+                   <li><a class="no-child" href="bcancel.php">Cancel Booking</a></li>
+                   <li><a class="no-child" href="thepayment.php">Pay For Booking</a></li>
+       
+               </ul>
+           </li>
+           <li>
+               <a>Choose Trip </a>
+               <ul>
+                   <li><a class="no-child" href="airporttrip.php">Airport Trip</a></li>
+                   <li><a class="no-child" href="Charter.php">Charter</a></li>
+       
+               </ul>
+           </li>
+           <li>
+                 <a class="no-child" href="thepayment.php">Make Payment</a>
+           </li>  
+           <li>
+               <a class="no-child" href="Contact.php">Contact</a>
+           </li>
+           <li>
+               <a class="no-child" href="logout.php">logout</a>
+           </li>
+
+         
+           <?php }else{
+
+       ?>
+   <li>
+       <a class="no-child" href="https://giddycruisetransportation.com">Home</a>
+   </li>
+   
+    <li>
+        <a>About Us</a>
+        <ul>
+           <li><a class="no-child" href="about.php">About Us</a></li>
+           <li><a class="no-child" href="ticketpolicy.php">Our Ticket Policy</a></li>
+           <li><a class="no-child" href="terminal.php">Our Terminals</a></li>
+  
+       </ul>
+   </li>
+       
+  
+   <li>
+       <a>Manage Booking</a>
+       <ul>
+           <li><a class="no-child" href="BookingReference.php">Booking Status</a></li>
+           <li><a class="no-child" href="bcancel.php">Cancel Booking</a></li>
+           <li><a class="no-child" href="thepayment.php">Pay For Booking</a></li>
+  
+       </ul>
+   </li>
+      
+   <li>
+       <a>Choose Trip </a>
+       <ul>
+           <li><a class="no-child" href="airporttrip.php">Airport Trip</a></li>
+           <li><a class="no-child" href="Charter.php">Charter</a></li>
+  
+       </ul>
+   </li>
+     
+   <li>
+       <a class="no-child" href="thepayment.php">Make Payment</a>
+   </li>  
+    <li>
+       <a class="no-child" href="Contact.php">Contact</a>
+   </li>
+   <li>
+       <a class="no-child" href="sign.php">Sign In/ Sign Up</a>
+   </li>
+ 
+
+
+
+</ul>
+<?php } ?>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+    </div>
+</div>
+<div class="container page-content">
+        <div class="gap"></div>
+
+
+    <div ng-app="BusSeats" class="ng-scope">
+        
+<div>
+  
+        
+<div id="leave">
+    <h4 class="booking-title bolded">
+        <?php 
+            $date = date('Y-m-d');
+             $string = $_SESSION['route'];
+             $Date =  $_SESSION['deptDate'];
+            //  if($string == 'Baltimore,New-York');
+            //  $nstring = 'Baltimore->Exxon Gas Station,New-York->4880 Broadway';
+            //  if($string == 'New-York,Baltimore');
+            //  $nstring = 'New-York->4880 Broadway,Baltimore->Exxon Gas Station';
+             $str_arr = explode (",", $string); 
+     //  print_r($str_arr);
+
+     echo "<h5> From ". strtoupper($str_arr[0]) .":-<i>".strtolower($str_arr[1]).'</i>'." =&gt; To:".strtoupper($str_arr[2])." ".':-'.'<i>'.$str_arr[3] ."</i><small>".' '.' '."</small></h>";
+
+     
+   
+             
+             ?><small class="header-text bolded"><?php echo $_SESSION['deptDate'] ?></small>
+        <small><a class="popup-text" href="#search-dialog" data-effect="mfp-zoom-out">Change search</a></small>
+    </h4>
+    <?php
+        $route = $string;
+    
+        
+        $record1 = mysqli_query($conn,"select routes.id AS id, routes.route_dep_time AS time, routes.bus AS bus, routes.price AS price, buses.seat AS seat from routes INNER JOIN buses ON buses.bus_name = routes.bus where routes.route_cities='$route' and routes.route_dep_date ='$Date' and routes.route_status =1;"); // fetch data from database
+        if (mysqli_num_rows($record1) > 0) {
+          
+            while($datas1 = mysqli_fetch_array($record1))
+            { 
+                   
+                $bus = $datas1['bus'];
+                $seat = $datas1['seat'];
+              
+                // print_r($bus);
+                $date = date('Y-m-d');
+                $string = $_SESSION['route'];
+                $str_arr = explode (",", $string); 
+
+                if($bus == 'Ford Van'){
+                    // print_r(' what is '. $bus.' I got u ');
+                    unset($_SESSION['deptTime']);
+                    $busimg = 'img/bus2.png';
+              
+                    $_SESSION['bus1'] = 'Ford Van';
+                    $bus = $_SESSION['bus1'];
+
+                    $deptTime  = $datas1['time'];
+                    $_SESSION['deptTime1']  = date("g:i a", strtotime("$deptTime"));
+                    $_SESSION['price1'] = $datas1['price'];
+                                        
+
+                    ?>
+         <br><br>
+         <form action="t3458jdey8est.php" method="POST" onsubmit="return validateCheckBox();">
+
+              <div class="row">
+        <div class="col-md-12">
+            <ul class="booking-list">
+      <li>
+        <div class="booking-item-container">
+    <div class="booking-item bg-white">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="booking-item-img-wrap">
+                    <img src="<?php echo $busimg; ?>" alt="Chisco Blazer (15 Seats)" title="Chisco Blazer (15 Seats)">
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="booking-item-flight-details">
+                    <h5 class="booking-item-title text-primary"> <?php echo $bus; ?> (<?php echo $seat; ?> Seats)</h5>
+                    <p class="booking-item-address"><i class="fa fa-map-marker"></i>
+                    <?php 
+                        $date = date('Y-m-d');
+                        $string = $_SESSION['route'];
+                        $str_arr = explode (",", $string); 
+                //  print_r($str_arr);
+                  echo strtoupper($str_arr[2]) .'('.strtolower($str_arr[3]).')';
+
+                        ?>
+                    </p>
+                    <p class="booking-item-address"> <i class="fa fa-wheelchair"></i>
+                     <?php
+                      $route = $string;
+                      $date = date('Y-m-d');
+                      $sql = "SELECT * FROM seats WHERE date ='$date' AND route='$route' AND bus='$bus' AND status='active' ORDER BY id DESC";
+
+                      $result = mysqli_query($conn, $sql);
+                      while($row = mysqli_fetch_array($result))
+                      {
+                        $totalSeat = explode(",", $row["PNR"]);
+                                // print_r($totalSeat);
+                                // echo 'count: '.count($totalSeat);
+                      
+                     
+                      $st = $seat;
+                      $total = count($totalSeat);
+                     
+                    //   echo $total; 
+                      $availSeat  = $st-$total;
+                      echo $availSeat. ' '. "Seats(s) Available";
+                    }
+                     
+                     ?></p>
+                    <p class="booking-item-address"> <i class="fa fa-user"></i> Adults:<?php echo $_SESSION['adult']?> </p>
+                    <ul class="booking-item-features booking-item-features-rentals booking-item-features-sign">
+                            <li rel="tooltip" data-placement="top" title="" data-original-title="Air Condition">
+                                <i class="im im-air"></i><span class="booking-item-feature-sign">Air Condition</span>
+                            </li>
+                            <li rel="tooltip" data-placement="top" title="" data-original-title="Media">
+                                <i class="fa fa-film"></i><span class="booking-item-feature-sign">Media</span>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="booking-item-arrival">
+                    <p class="text-color mt15"><b>Departure Info</b></p>
+                    <p class="booking-item-address"><i class="fa fa-clock-o"></i> <?php echo $_SESSION['deptTime1']?></p>
+                    <input type="hidden" name="doj" id="doj" value="<?php echo $_SESSION['deptTime1']?>" readonly>
+                    <p class="booking-item-address"><i class="fa fa-calendar"></i> <?php echo $_SESSION['deptDate']?></p>
+                    <p class="booking-item-address"><i class="fa fa-map-marker"></i> <?php echo strtoupper($str_arr[0]).' :- '. strtolower($str_arr[1])?> </p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <!-- <del class="booking-item-price text-darken discounted-price">₦14,200.00</del> <span>(0.00 % off)</span> <br> -->
+                <span class="booking-item-price text-darken text-color">$<?php echo $_SESSION['price1']?></span><span>/person</span>
+                <br>
+                <a class="btn btn-primary btn-lg" id="expander">View Seat</a>
+            </div>
+        </div><div class="booking-item-details">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="small-mobile bus-back dvBooking ng-scope" data-schedule-id="ebd08e2a-bf05-e911-80f9-001c4281ad62" data-booking-date="21-Mar-2022" data-international-trip="False" data-booking-time="7:00 AM" data-booking-direction="leave" data-show-return="false" data-doc-no-passport="" data-doc-no-id="" data-doc-virgin-passport="" data-route-description="ABUJA (Utako) => LAGOS (Jibowu)" data-current-fare="14200.00" data-percent-discount="0">
+                        <bus-seats id="busSeat" max="15" height="6" width="3" uselinear="true" totalnoofseats="15" class="ng-isolate-scope" selectedseats="[]">
+            <h5 class="text-color"><i class="fa fa-wheelchair"></i> <b>Seat Selection</b></h5>
+
+    <div class="col-xs-12">
+        <div class="row">
+        <ul class="thumbnails">
+						<?php
+                            // $date = date('Y-m-d');
+                            $date = $_SESSION['deptDate'];
+                            //  $dates =('2022-04-26');
+                            // echo $date;
+							// $dfrom = strip_tags( utf8_decode( $_POST['dfrom'] ) );
+							// $dto = strip_tags( utf8_decode( $_POST['dto'] ) );
+							// $DapartureDate = strip_tags( utf8_decode( $_POST['DapartureDate'] ) );
+
+							$sql = "SELECT * FROM seats WHERE date ='$date' AND route='$route' AND bus='$bus' AND status='active' ORDER BY id DESC";
+							$result = mysqli_query($conn, $sql);
+                           
+                            $st= $st+1;
+                            $_SESSION['seat'] = $st;
+							if ( mysqli_num_rows($result) == 0 )
+							{
+								for($i=1; $i<$st; $i++)
+								{
+									echo "<li class='span1'>";
+										echo "<a class='thumbnail' title='Available'>";
+											echo "<img src='img/avail.png' alt='Available Seat'/>";
+											echo "<label class='checkbox'>";
+												echo "<input type='checkbox' name='ch".$i."'/>Seat".$i;
+											echo "</label>";
+										echo "</a>";
+									echo "</li>";	
+                               
+                                                       
+								}
+							}
+							else
+							{
+								$seats = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+                                // $seats = [];
+                                while($row = mysqli_fetch_array($result))
+								{
+									$pnr = explode(",", $row["PNR"]);
+                                    // print_r($pnr);
+                                    // echo 'count: '.count($pnr);
+									// $pnr[0] = intval($pnr[0]) - 1;
+									// $seats[$pnr[0]] = 1;
+                                    // foreach($pnr as $pnrs){
+                                 
+                                        for($a=0; $a<count($pnr); $a++)
+                                        {
+                                            $pnr[$a] = intval($pnr[$a]) - 1;
+                                            $seats[$pnr[$a]] = 1;
+                                        }
+                                    
+                                    
+
+                                    // }
+                                    
+								}
+                             
+								for($i=1; $i<$st; $i++)
+								{
+									$j = $i - 1;
+                                   
+                                  
+									if($seats[$j])
+									{
+										echo "<li class='span1'>";
+											echo "<a class='thumbnail' title='Booked'>";
+												echo "<img src='img/booked.png' alt='Booked Seat'/>";
+												echo "<label class='checkbox'>";
+													echo "<input type='checkbox' name='ch".$i."' disabled/>Seat".$i;
+												echo "</label>";
+											echo "</a>";
+										echo "</li>";
+
+									}
+									else
+									{
+										echo "<li class='span1'>";
+											echo "<a class='thumbnail' title='Available'>";
+												echo "<img src='img/avail.png' alt='Available Seat'/>";
+												echo "<label class='checkbox'>";
+													echo "<input type='checkbox' name='ch".$i."'/>Seat".$i;
+												echo "</label>";
+											echo "</a>";
+										echo "</li>";
+
+									}
+								}									
+								
+							}
+						?>
+						</ul>
+                </div>
+            </div>
+
+
+        </bus-seats>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-sm-12 col-xs-12 pt50">
+                    
+                    <div class="col-xs-12 col-md-6">
+                        <label>
+                            <img class="img20" src="img/avail.png">
+                            Available <span class="hidden-xs">Seat</span>
+                        </label>
+                    </div>
+                  
+                    <div class="col-xs-12 col-md-6">
+                        <label>
+                            <img class="img20" src="img/booked.png">
+                            Booked <span class="hidden-xs">Seat</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <hr>
+                <div class="col-xs-3 col-xs-offset-6 col-md-3">
+                <!-- <a href="updatecar.php?id=<?php echo $datas1['id']; ?>"><button id="completeSeatSelection" type="submit" class="btn btn-primary btn-lg">Proceed</button> </a> -->
+                <button id="completeSeatSelection1" type="submit" name="btn1" class="btn btn-primary btn-lg">Proceed</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+             <?php
+        
+                }
+                
+                elseif($bus == 'Toyota Siena'){ 
+
+                      $busimg = 'img/bus1.png';
+                      $_SESSION['bus'] = 'Toyota Siena';
+
+                      unset($_SESSION['deptTime']);
+
+                      $deptTime = $datas1['time'];                     
+                      $_SESSION['deptTime']  = date("g:i a", strtotime("$deptTime"));
+
+                      $bus = $_SESSION['bus'];
+                      $_SESSION['price2'] = $datas1['price'];
+                     
+                    ?>
+             
+<form action="t3458jdey8ests.php" method="POST" onsubmit="return validateCheckBox();">
+
+<div class="row">
+        <div class="col-md-12">
+            <ul class="booking-list">
+      <li>
+        <div class="booking-item-container">
+    <div class="booking-item bg-white">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="booking-item-img-wrap">
+                    <img src="<?php echo $busimg; ?>" alt="Chisco Blazer (15 Seats)" title="Chisco Blazer (15 Seats)">
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="booking-item-flight-details">
+                    <h5 class="booking-item-title text-primary"> <?php echo $bus; ?> (<?php echo $seat; ?> Seats)</h5>
+                    <p class="booking-item-address"><i class="fa fa-map-marker"></i>
+                    <?php 
+                        $date = date('Y-m-d');
+                        $string = $_SESSION['route'];
+                        $str_arr = explode (",", $string); 
+                //  print_r($str_arr);
+                  echo strtoupper($str_arr[2]) .'('.strtolower($str_arr[3]).')';
+
+                        ?>
+                    </p>
+                    <p class="booking-item-address"> <i class="fa fa-wheelchair"></i>
+                     <?php
+                     $route = $string;
+                     $date = date('Y-m-d');
+                     $sql = "select count(*) FROM seats where date ='$Date' and route='$route' and bus='$bus' and status ='active'";
+                     $result = mysqli_query($conn, $sql);
+                     $row = mysqli_fetch_array($result);
+                     $st = $seat;
+                     $total = $row[0];
+                    //  echo $total; 
+                     $availSeat  = $st-$total;
+                     echo $availSeat. ' '. "Seats(s) Available";
+                     
+                     ?></p>
+                    <p class="booking-item-address"> <i class="fa fa-user"></i> Adults:<?php echo $_SESSION['adult']?> </p>
+                    <ul class="booking-item-features booking-item-features-rentals booking-item-features-sign">
+                            <li rel="tooltip" data-placement="top" title="" data-original-title="Air Condition">
+                                <i class="im im-air"></i><span class="booking-item-feature-sign">Air Condition</span>
+                            </li>
+                            <li rel="tooltip" data-placement="top" title="" data-original-title="Media">
+                                <i class="fa fa-film"></i><span class="booking-item-feature-sign">Media</span>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="booking-item-arrival">
+                    <p class="text-color mt15"><b>Departure Info</b></p>
+                    <p class="booking-item-address"><i class="fa fa-clock-o"></i> <?php echo $_SESSION['deptTime']?></p>
+                    <input type="hidden" name="doj" id="doj" value="<?php echo $_SESSION['deptTime']?>" readonly>
+                    <p class="booking-item-address"><i class="fa fa-calendar"></i> <?php echo $_SESSION['deptDate']?></p>
+                    <p class="booking-item-address"><i class="fa fa-map-marker"></i> <?php echo strtoupper($str_arr[0]).' :- '. strtolower($str_arr[1])?> </p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-12">
+                <!-- <del class="booking-item-price text-darken discounted-price">₦14,200.00</del> <span>(0.00 % off)</span> <br> -->
+
+                <span class="booking-item-price text-darken text-color">$<?php echo $_SESSION['price2']?></span><span>/person</span>
+                <br>
+                <a class="btn btn-primary btn-lg" id="expander">View Seat</a>
+            </div>
+        </div>
+        <div class="booking-item-details">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="small-mobile bus-back dvBooking ng-scope" data-schedule-id="ebd08e2a-bf05-e911-80f9-001c4281ad62" data-booking-date="21-Mar-2022" data-international-trip="False" data-booking-time="7:00 AM" data-booking-direction="leave" data-show-return="false" data-doc-no-passport="" data-doc-no-id="" data-doc-virgin-passport="" data-route-description="ABUJA (Utako) => LAGOS (Jibowu)" data-current-fare="14200.00" data-percent-discount="0">
+                        <bus-seats id="busSeat" max="15" height="6" width="3" uselinear="true" totalnoofseats="15" class="ng-isolate-scope" selectedseats="[]">
+            <h5 class="text-color"><i class="fa fa-wheelchair"></i> <b>Seat Selection</b></h5>
+
+    <div class="col-xs-12">
+        <div class="row">
+        <ul class="thumbnails">
+						<?php
+                            // $date = date('Y-m-d');
+                            $DDate = $_SESSION['deptDate'];
+                            //  $dates =('2022-04-26');
+                            // echo $date;
+							// $dfrom = strip_tags( utf8_decode( $_POST['dfrom'] ) );
+							// $dto = strip_tags( utf8_decode( $_POST['dto'] ) );
+							// $DapartureDate = strip_tags( utf8_decode( $_POST['DapartureDate'] ) );
+
+							$sql = "select * from seats where date ='$DDate' and route='$route' and bus='$bus' and status='active' ORDER BY id DESC";
+							$result = mysqli_query($conn, $sql);
+                           
+                            $st= $st+1;
+                            $_SESSION['seat'] = $st;
+							if ( mysqli_num_rows($result) == 0 )
+							{
+								for($i=1; $i<$st; $i++)
+								{
+									echo "<li class='span1'>";
+										echo "<a class='thumbnail' title='Available'>";
+											echo "<img src='img/avail.png' alt='Available Seat'/>";
+											echo "<label class='checkbox'>";
+												echo "<input type='checkbox' name='ch".$i."'/>Seat".$i;
+											echo "</label>";
+										echo "</a>";
+									echo "</li>";	
+                               
+                                                       
+								}
+							}
+							else
+							{
+								$seats = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+								while($row = mysqli_fetch_array($result))
+								{
+									$pnr = explode(",", $row['PNR']);
+									$pnr[0] = intval($pnr[0]) - 1;
+									$seats[$pnr[0]] = 1;
+								}
+								for($i=1; $i<$st; $i++)
+								{
+									$j = $i - 1;
+									if($seats[$j] == 1)
+									{
+										echo "<li class='span1'>";
+											echo "<a class='thumbnail' title='Booked'>";
+												echo "<img src='img/booked.png' alt='Booked Seat'/>";
+												echo "<label class='checkbox'>";
+													echo "<input type='checkbox' name='ch".$i."' disabled/>Seat".$i;
+												echo "</label>";
+											echo "</a>";
+										echo "</li>";
+
+									}
+									else
+									{
+										echo "<li class='span1'>";
+											echo "<a class='thumbnail' title='Available'>";
+												echo "<img src='img/avail.png' alt='Available Seat'/>";
+												echo "<label class='checkbox'>";
+													echo "<input type='checkbox' name='ch".$i."'/>Seat".$i;
+												echo "</label>";
+											echo "</a>";
+										echo "</li>";
+
+									}
+								}									
+								
+							}
+						?>
+						</ul>
+                </div>
+            </div>
+
+
+        </bus-seats>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-sm-12 col-xs-12 pt50">
+                    
+                    <div class="col-xs-12 col-md-6">
+                        <label>
+                            <img class="img20" src="img/avail.png">
+                            Available <span class="hidden-xs">Seat</span>
+                        </label>
+                    </div>
+                  
+                    <div class="col-xs-12 col-md-6">
+                        <label>
+                            <img class="img20" src="img/booked.png">
+                            Booked <span class="hidden-xs">Seat</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <hr>
+                <div class="col-xs-3 col-xs-offset-6 col-md-3">
+                <!-- <a href="updatecar.php?id=<?php echo $datas1['id']; ?>"><button id="completeSeatSelection" type="submit" class="btn btn-primary btn-lg">Proceed</button> </a> -->
+                <button id="completeSeatSelection1" type="submit" name="btn2" class="btn btn-primary btn-lg">Proceed</button>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+                        </form>
+
+                <?php
+
+                }
+                
+
+            }
+        }
+
+    ?>
+  
+
+    </li>            </ul>
+            <p class="text-right">
+                Not what you're looking for? <a class="" href="index.php" data-effect="">Try your search again</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+</div>
+    </div>
+    </div>
+</div>
+<div class="gap"></div>
+
+    </div>
+
+   
+<footer id="main-footer">
+    <div class="hidden-xs hidden-sm">
+        <div id="fbaseone" class="container">
+            <div class="col-md-5 col-sm-4">
+                <ul style="float:right; margin-top:1%">
+                    <li> <a class="no-child" href="https://giddycruisetransportation.com">HOME</a> </li>
+                    <li>
+                        <a href="About.php">ABOUT US</a>
+                    </li>
+                    <li>  <a class="no-child" href="ticketpolicy.php">TICKET POLICY</a> </li>
+                </ul>
+            </div>
+            <div class="col-md-2 col-sm-4">
+                <p align="center"><img src="img/new-skin/chisco_logo.png" width="150px"></p>
+            </div>
+            <div class="col-md-5 col-sm-4">
+                <ul>
+                    <li> <a href="#">FAQs</a> </li>
+                    <li> <a href="airporttrip.php">AIRPORT DROP OFF</a> </li>
+                    <li> <a href="Charter.php">CHARTER BUS</a> </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="container pt20">
+        <div class="col-md-4 col-sm-12 col-xs-12">
+            <h4>ABOUT Giddy Cruise Transport</h4>
+            <p>
+                As a Brand, our reputation is built on cutting-edge customer focused solutions. Our goal is to become the most prominent Transport/Integrated Logistics and Supply Chain Organization/Brand and a one stop shop for travel/tourism .
+
+            </p>
+            <p class="pimg">
+                <a href="#"><img src="img/new-skin/fb.svg" width="40px"></a>
+                <a href="#"><img src="img/new-skin/twitter.svg" width="40px"></a>
+                <a href="#"><img src="img/new-skin/ig.svg" width="40px"></a>
+            </p>
+        </div>
+        <div class="col-md-2 col-sm-4 hidden-xs">
+            <h4>SITE LINKS</h4>
+            <ul>
+                <!-- <li><a href="Careers.html">Career</a></li> -->
+                <li><a href="Faq.php">FAQs</a></li>
+                <li><a href="Contact.php">Contact us</a></li>
+                <li><a href="ticketpolicy.php">Ticket Policy</a></li>
+                <li><a href="#">Terms of use</a></li>
+
+            </ul>
+        </div>
+        <div class="col-md-2 col-sm-4 hidden-xs ">
+            <h4>COMPANY</h4>
+            <ul>
+                <li><a href="#/" target="_blank">Giddy Host</a></li>
+
+            </ul>
+            <h4>ADDRESS</h4>
+            <p>
+            10 Cinnamon Cir, Randallstown, MD 21133, USA
+            </p>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <h4>HAVE QUESTION</h4>
+            <p>+14432202654 </p>
+            <p>+14439855520 </p>
+            <h4>EMAIL ADDRESS </h4>
+            <p>gidicruiztransportation@gmail.com </p>
+            <p>support@giddycruisetransportation.com</p>
+
+
+            <p align="">
+                <button class="btn btn-large btnfoot"> <i class="fa fa-envelope" aria-hidden="true"></i> Contact us</button>
+            </p>
+        </div>
+
+        <div style="clear:both"></div>
+        <hr />
+
+        <p align="center">
+            Copyright © 2022 - Giddy Cruise Transport. All rights reserved. Powered by <a class="text-color bolded" target="_blank" href="https://giddyhost.com"> Giddy Host</a>
+        </p>
+    </div>
+
+
+</footer>
+
+
+
+
+    <div id="server-message-dialog" class="modal modal-message modal-success fade in" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i id="server-message-icon" class="glyphicon glyphicon-check"></i>
+            </div>
+            <div class="modal-title"><h4 class="modal-title" id="server-message-title">Model Title</h4></div>
+            <div class="modal-body"><div id="server-message-content" class="text-align-left wrap">Content</div></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+            </div>
+        </div> <!-- / .modal-content -->
+    </div> <!-- / .modal-dialog -->
+</div> </div>
+
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script src="lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
+
+    <script src="js/modernizr.js"></script>
+    <script src="js/jquery-migrate-1.4.1.min.js"></script>
+    <script src="js/slimmenu.js"></script>
+    <script src="js/bootstrap-timepicker.js"></script>
+    <script src="js/bootstrap-select.js"></script>
+
+    <script src="js/dropit.js"></script>
+    <script src="js/ionrangeslider.js"></script>
+    <script src="js/icheck.js"></script>
+    <script src="js/fotorama.js"></script>
+    <script src="js/typeahead.js"></script>
+    <script src="js/card-payment.js"></script>
+    <script src="js/magnific.js"></script>
+    <script src="js/owl-carousel.js"></script>
+    <script src="js/fitvids.js"></script>
+    <script src="js/tweet.js"></script>
+    <script src="js/countdown.js"></script>
+    <script src="js/gridrotator.js"></script>
+    <script src="js/jquery.nicescroll.min.js"></script>
+    <script src="js/functionsc37a.js?v=he1Iyy-M8r_d_HYU_OnRF54ub32de-URpTmXgeWzv7E"></script>
+
+    <script src="js/custom9969.js?v=5TxqwrZcIJk2iGhWpAs2932Ym8_WYyalqRK5aSa2vE8"></script>
+    <script src="js/request.helper0b0e.js?v=1Yh7gtvjFt1dVE1kr3_cRhtAiSC3EHa59eAZl7faaOM"></script>
+
+   
+     
+    <script type='text/javascript'>
+			function validateCheckBox()
+			{
+				var c = document.getElementsByTagName('input');
+				for (var i = 0; i < c.length; i++)
+				{
+					if (c[i].type == 'checkbox')
+					{
+						if (c[i].checked) 
+						{
+                            return true;
+						}
+					}
+				}
+				alert('Please select at least 1 ticket.');
+				return false;
+			}
+         
+   
+		</script> 
+
+    <script>
+        $(document).ready(function () {
+            //$('a[href^="#"]').on('click',function (e) {
+            //    e.preventDefault();
+
+            //    var target = this.hash,
+            //    $target = $(target);
+
+            //    $('html, body').stop().animate({
+            //        'scrollTop': $target.offset().top
+            //    }, 900, 'swing', function () {
+            //        window.location.hash = target;
+            //    });
+            //});
+
+            $('.input-group.date').datepicker({ format: "D M d, yyyy" });
+
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip();
+            })
+
+        });</script>
+
+<!-- <script type='text/javascript' data-cfasync='false'>window.purechatApi = { l: [], t: [], on: function () { this.l.push(arguments); } }; (function () { var done = false; var script = document.createElement('script'); script.async = true; script.type = 'text/javascript'; script.src = 'https://app.purechat.com/VisitorWidget/WidgetScript'; document.getElementsByTagName('HEAD').item(0).appendChild(script); script.onreadystatechange = script.onload = function (e) { if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete')) { var w = new PCWidget({ c: 'b185fdcf-cee6-47a0-a2a4-90b304162ad7', f: true }); done = true; } }; })();</script> -->
+<!-- ..loading before submit -->
+<script>
+	function myFunction() {
+	var spinner = $('#loader');
+	document.getElementById("loader").style.display = "inline"; // to undisplay
+	}
+	</script>
+
+<!-- php do not refresh page after submit post -->
+<script>
+		if ( window.history.replaceState ) {
+			window.history.replaceState( null, null, window.location.href );
+		}
+	</script>
+
+            <!-- GetButton.io widget life chat -->
+            <script type="text/javascript">
+              (function () {
+                  var options = {
+                      facebook: "105248471461316", // Facebook page ID
+                      whatsapp: "+14432202654", // WhatsApp number
+                      call_to_action: "Chat Us", // Call to action
+                      button_color: "#FF6550", // Color of button
+                      position: "right", // Position may be 'right' or 'left'
+                      order: "facebook,whatsapp", // Order of buttons
+                  };
+                  var proto = document.location.protocol, host = "getbutton.io", url = proto + "//static." + host;
+                  var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = url + '/widget-send-button/js/init.js';
+                  s.onload = function () { WhWidgetSendButton.init(host, proto, options); };
+                  var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+              })();
+          </script>
+          <!-- /GetButton.io widget -->
+
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+<!-- Mirrored from chiscotransport.com.ng/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 26 Jan 2022 06:12:00 GMT -->
+</html>

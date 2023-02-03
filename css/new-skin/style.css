@@ -1,0 +1,476 @@
+
+
+body {
+    background: #fff;
+    color: #171717;
+    font-family: 'Work Sans', sans-serif;
+    line-height: 1.6em;
+}
+
+h3 {
+    font-family: 'Lato', sans-serif;
+    font-size: 25px;
+}
+
+h2 {
+    font-family: 'Lato', sans-serif;
+    font-size: 30px;
+}
+
+h1 {
+    font-family: 'Lato', sans-serif;
+    font-size: 45px;
+}
+
+h4 {
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
+    margin-bottom: 5%;
+}
+
+h5 {
+    color: #A8A8A8;
+}
+
+p {
+    font-size: 14px;
+}
+
+.panel-heading {
+    padding: 0;
+}
+
+#header {
+    width: 100%;
+    height: auto;
+    background: #fff;
+    padding-bottom: 1.5%;
+    /* position: fixed;
+  z-index: 1000; */
+    padding-bottom: 1%;
+    margin-top: 0px;
+    font-family: 'Work Sans', sans-serif;
+    /*box-shadow: #F8F8F8 0px 2px 5px;*/
+    border-bottom: 1px solid #E8E8E8;
+    background: url('../../img/new-skin/cbg.jpg') no-repeat #fff;
+    background-position-x: 100%;
+    background-position-y: 100%;
+}
+
+.topHeader {
+    width: 100%;
+    height: auto;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 15px;
+    position: relative;
+    top: 25px;
+    color: #666666;
+    right: 20px;
+}
+
+    .topHeader a {
+        color: #666666;
+    }
+
+#main-nav {
+    width: 100%;
+    height: 100px;
+    background: #333;
+    color: #fff;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 800;
+    font-size: 24px;
+}
+
+.navbar-default {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+    .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+        color: #fff;
+        background: #011B4D;
+    }
+
+    .navbar-default .navbar-nav > li > a {
+        color: #011B4D;
+        font-family: 'Work Sans', sans-serif;
+        font-weight: 500;
+        font-size: 16px;
+    }
+
+        navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+            color: #011B4D !important;
+            background-color: transparent;
+        }
+
+        .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+            color: #011B4D;
+            background-color: transparent;
+        }
+
+    .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+        color: #fff;
+        background: #011B4D;
+    }
+
+#banner {
+    width: 100%;
+    height: auto;
+    float: left;
+}
+
+.bContent {
+    position: absolute;
+    top: 200px;
+    color: white;
+}
+
+#booking-box {
+    float: left;
+    width: 100%;
+    height: auto;
+    background: white;
+    margin-top: -130px;
+    border-radius: 10px;
+    box-shadow: 1px 10px 20px #ccc;
+    padding: 4% 2%;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    color: #011B4D;
+    cursor: default;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-bottom: 3px solid red;
+    font-weight: bolder;
+}
+
+.nav-tabs > li > a {
+    margin-right: 2px;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    border-radius: 4px 4px 0 0;
+    color: #959595;
+    font-weight: bolder;
+}
+
+
+.form-control {
+    display: block;
+    width: 100%;
+    height: 50px;
+    padding: 7px 10px;
+    font-size: 14px;
+    line-height: 1.42857143;
+}
+
+label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 100;
+}
+
+.panel-default {
+    border-color: transparent;
+}
+
+.nav-tabs {
+    border-bottom: transparent;
+    width: max-content;
+}
+
+.panel-default > .panel-heading {
+    color: #333;
+    background-color: transparent;
+    border-color: #ddd;
+}
+
+.sbb {
+    padding: 2.5% 0%;
+    width: 100%;
+    margin-top: 6.5%;
+    background: #D5411E;
+}
+
+#faci {
+    /*float: left;
+    width: 100%;*/
+    height: auto;
+    margin: 5%;
+}
+
+
+    #faci h2 {
+        color: #011B4D;
+        margin: 3% 0%;
+    }
+
+
+.busdetails {
+    float: left;
+    width: 100%;
+    border: 1px solid #ccc;
+    height: auto;
+    padding: 2%;
+    background: #FCFCFC;
+    border-radius: 10px;
+    margin-bottom: 5%;
+}
+
+
+#busdetails h3 {
+    color: #011B4D;
+}
+
+.num4 {
+    border: 1px solid #ddd;
+    border-radius: 100px;
+    color: red;
+    padding: 2% 4%;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.sidem {
+    margin-bottom: 5%;
+    width: 230px !important;
+}
+
+.x1 {
+    width: 150px;
+}
+
+#explore {
+    width: 100%;
+    min-height: 550px;
+    background: #F5F5F5;
+    margin-top: 5%;
+    padding: 5%;
+    background: url('../../img/new-skin/placebg.svg') center repeat-x #F5F5F5;
+    background-position-x: 100%;
+    background-position-y: 100%;
+}
+
+    #explore h3 {
+        margin-bottom: 5%;
+    }
+
+#hotel {
+    width: 100%;
+    height: auto;
+    color: white;
+    margin-bottom: -50px;
+}
+
+.hContent {
+    margin-top: -340px;
+    font-size: 16px;
+}
+
+    .hContent button {
+        background: #D5411E;
+        padding: 1% 6%;
+        font-family: 18px;
+        color: white;
+    }
+
+.btnfoot {
+    background: #D5411E;
+    padding: 2% 6%;
+    font-family: 18px;
+    color: white;
+}
+
+footer {
+    position: relative;
+    background: #122C5B;
+    height: auto;
+    width: 100%;
+    color: white;
+    padding-bottom: 5%;
+    font-size: 14px;
+}
+
+    footer ul {
+        margin: 0px;
+        padding: 0px;
+    }
+
+    footer p {
+        font-size: 14px;
+    }
+
+    footer ul li a {
+        float: left;
+        color: white;
+        font-size: 14px;
+        margin-bottom: 6%;
+        width: 100%;
+    }
+
+#fbaseone {
+    width: 100%;
+    height: auto;
+    background: #263D65;
+    padding: 1%;
+    font-weight: bolder;
+    margin-bottom: 3%;
+}
+
+footer ul {
+    list-style: none;
+    margin-left: 0px;
+}
+
+#fbaseone ul li {
+    float: left;
+    margin-right: 40px;
+    margin-top: 3%;
+}
+
+/************************************
+
+    Slim menus
+
+************************************/
+.slimmenu-menu-collapser {
+    background-color: transparent;
+    color: #000;
+}
+
+.slimmenu-menu-collapser {
+    position: relative;
+    background-color: #333;
+    color: #fff;
+    width: 100%;
+    height: 48px;
+    line-height: 48px;
+    font-size: 16px;
+    padding: 0 8px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.slimmenu-collapse-button {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    width: 40px;
+    -webkit-border-radius: 40px;
+    border-radius: 40px;
+    color: #fff;
+    padding: 7px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+    -webkit-transform: translate(0, -50%);
+    -moz-transform: translate(0, -50%);
+    -o-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+ul.slimmenu {
+    height: 41px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+    ul.slimmenu li {
+        position: relative;
+        display: inline-block;
+    }
+
+        ul.slimmenu li.active > a, ul.slimmenu li:hover > a {
+            background: #011B4D;
+            color: #fff;
+            border-bottom: 3px solid #ea0001;
+        }
+
+        ul.slimmenu li a {
+            display: block;
+            padding: 12px 20px;
+            font-size: 14px;
+            text-transform: uppercase;
+            font-family: 'Work Sans', sans-serif;
+            font-weight: bolder;
+            color: #737373;
+            -webkit-transition: background-color 0.17s ease-out;
+            -moz-transition: background-color 0.17s ease-out;
+            -o-transition: background-color 0.17s ease-out;
+            -ms-transition: background-color 0.17s ease-out;
+            transition: background-color 0.17s ease-out;
+        }
+
+        ul.slimmenu li.active > a.no-child, ul.slimmenu li:hover > a.no-child {
+            padding-bottom: 7px;
+        }
+
+        ul.slimmenu li > ul {
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 100%;
+            z-index: 999;
+            padding: 0;
+            min-width: 170px;
+        }
+
+            ul.slimmenu li > ul li > ul {
+                display: none;
+                position: absolute;
+                left: 0;
+                top: 100%;
+                z-index: 999;
+                padding: 0;
+                min-width: 170px;
+            }
+
+            ul.slimmenu li > ul li.slimmenu-sub-menu > ul {
+                display: none;
+                position: absolute;
+                left: 170px;
+                top: 0px;
+                z-index: 999;
+                padding: 0;
+                min-width: 200px;
+            }
+
+        ul.slimmenu li ul {
+            margin: 0;
+            list-style: none;
+        }
+
+            ul.slimmenu li ul li {
+                display: block;
+            }
+
+                ul.slimmenu li ul li a {
+                    background-color: #150101;
+                    color: #fff;
+                    font-size: 11px;
+                    text-align: left;
+                }
+
+        ul.slimmenu li .slimmenu-sub-collapser {
+            position: absolute;
+            right: 11px;
+            top: 0;
+            width: 21px;
+            height: 100%;
+            text-align: center;
+            z-index: 999;
+            cursor: pointer;
+        }
+
+        ul.slimmenu li.slimmenu-sub-menu a {
+            padding: 12px 34px 7px 20px;
+        }
