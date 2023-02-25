@@ -2,13 +2,13 @@
 //$servername = "localhost";$servername = "localhost";
 $servername = "localhost";
 // Enter your MySQL username below(default=root)
-$username = "xxxxxxxxx";
+//$username = "xxxxxxxxx";
 //$username = 'xxxxxxx';
 // Enter your MySQL password below
-$password = "xxxxxx";
+//$password = "xxxxxx";
 //$password = 'xxxxxx';
-$dbname = "xxxxxxxxxx";
-//$dbname = 'xxxxxx';
+//$dbname = "xxxxxxxxxx";
+//$dbname = 'xxxxxx';$servername = 'localhost';        $username = 'root';        $password = '';        $dbnamease = 'gt';
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

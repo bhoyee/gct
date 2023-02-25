@@ -1,11 +1,10 @@
 <?php
-
 Class dbObj{
 /* Database connection start */
 var $dbhost = "localhost";
-var $username = "giddycru_root";
-var $password = "giddyhost_01";
-var $dbname = "giddycru_gt";
+var $username = "root";
+var $password = "";
+var $dbname = "gt";
 var $conn;
 function getConnstring() {
 $con = mysqli_connect($this->dbhost, $this->username, $this->password, $this->dbname) or die("Connection failed: " . mysqli_connect_error());

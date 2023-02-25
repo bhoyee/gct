@@ -1,10 +1,10 @@
 <?php
     function db_connect()
     {
-        $servername = 'localhost';
-        $username = 'xxxxxx';
-        $password = 'xxxxxx';
-        $database = 'xxxxxx';
+     	$servername = 'localhost';
+        $username = 'root';
+        $password = '';
+        $database = 'gt';
 
         $conn = mysqli_connect($servername, $username, $password, $database);
         return $conn;
