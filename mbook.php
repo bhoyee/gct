@@ -128,7 +128,7 @@ if(isset($_SESSION['email'])) {
                  // $newDate = date("Y-m-d", strtotime($fdate));
                 // $fdatee = date("Y-m-d", strtotime($fdate));
 
-                $record = mysqli_query($conn,"select bookingCode, tripChar, bookdate, bookstatus from book where bookingCode LIKE '".$bookID."' OR bookdate LIKE '".$tdate."' AND email= '".$emails."'"); // fetch data from database
+                $record = mysqli_query($conn,"select bookingCode, tripChar, bookdate, bookstatus from book where bookingCode LIKE '".$bookID."' OR bookdate LIKE '".$tdate."' AND email= '".$emails."' ORDER BY bookdate DESC"); // fetch data from database
                 if (mysqli_num_rows($record) > 0) {
                 while($datas = mysqli_fetch_array($record))
                   {
@@ -177,7 +177,7 @@ if(isset($_SESSION['email'])) {
                 $count=1;
                 // $newDate = date("Y-m-d", strtotime($fdate));
                // $fdatee = date("Y-m-d", strtotime($fdate));
-               $record1 = mysqli_query($conn,"select bookingCode, tripChar, bookdate,bookstatus from book where email='$email'"); // fetch data from database
+               $record1 = mysqli_query($conn,"select bookingCode, tripChar, bookdate,bookstatus from book where email='$email' ORDER BY bookdate DESC"); // fetch data from database
                if (mysqli_num_rows($record1) > 0) {
                while($datas1 = mysqli_fetch_array($record1))
                  {
