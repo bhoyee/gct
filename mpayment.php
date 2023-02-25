@@ -202,7 +202,7 @@ if(isset($_SESSION['email'])) {
                 $count=1;
                 // $newDate = date("Y-m-d", strtotime($fdate));
                // $fdatee = date("Y-m-d", strtotime($fdate));
-               $record1 = mysqli_query($conn,"select trx_id, bookingCode, fName, email, amt, status, p_date from stripe_payment where email='$email'"); // fetch data from database
+               $record1 = mysqli_query($conn,"select trx_id, bookingCode, fName, email, amt, status, p_date from stripe_payment where email='$email' ORDER BY p_date DESC"); // fetch data from database
                if (mysqli_num_rows($record1) > 0) {
                while($datas1 = mysqli_fetch_array($record1))
                  {
