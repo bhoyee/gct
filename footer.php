@@ -58,7 +58,7 @@
             </ul>
             <h4>ADDRESS</h4>
             <p>
-            10 Cinnamon Cir, Randallstown, MD 21133, USA
+            200 E Pratt St Suite 4100, Baltimore, MD 21202, USA
             </p>
         </div>
         <div class="col-md-4 col-sm-4 col-xs-12">
