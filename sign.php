@@ -9,56 +9,49 @@ $conn = db_connect();
     <div class="container page-content">
         <h4 class="page-title pt30" style="margin-left:20px">Sign into your GCT account</h4>
     <div>
-        <?php
+
+    <?php
         if (isset($_POST['psend'])){
-    
             $email  = trim($_POST["email"]);
             $pwd  = trim($_POST["pwd"]);
 
-            $sql = "SELECT id, email, pwd FROM users WHERE email = '$email' and pwd = '$pwd'";
-            $result = mysqli_query($conn,$sql);
-            $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+            $sql = "SELECT id, email, pwd FROM users WHERE email = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("s", $email);
+            $stmt->execute();
+            $stmt->store_result();
 
-            $count = mysqli_num_rows($result);
+            if($stmt->num_rows == 1) {
+                $stmt->bind_result($id, $cemail, $hashed_pwd);
+                $stmt->fetch();
 
-            if($count == 1) {
-                $cemail = $row['email'];
-                $cpwd   = $row['pwd'];
-
-                if($pwd == $cpwd){
+                if(password_verify($pwd, $hashed_pwd)){
                     $_SESSION['email'] = $cemail;
-                    // $_SESSION['loginIn'] = "YES";
-
                     $_SESSION['last_login_timestamp'] = time();
 
                     $script = "<script>
-                window.location = 'dashb.php';</script>";
-                echo $script;
-               
-
+                    window.location = 'dashb.php';</script>";
+                    echo $script;
+                } else {
+                    echo '<div class="alert alert-danger" role="alert">
+                        <strong>Alert!</strong> Your Password is invalid.
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>';
                 }
-                // session_register("myusername");
-              
-
-               
-       
-                // header("location: dashb.php");
-             }else {
-
+            } else {
                 echo '<div class="alert alert-danger" role="alert">
-                <strong>Alert!</strong> Your Login Name or Password is invalid.
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>';
-       
-             }
-    
-			// header('Location: success.php?s='.urlencode('Your seat is booked.')); exit;
+                    <strong>Alert!</strong> Your Login Name or Password is invalid.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>';
+            }
         }
-      
-    
-?>
+        ?>
+
+
  
 <div class="row ">
     <div class="col-md-6 col-sm-12 "style="margin: auto;">
