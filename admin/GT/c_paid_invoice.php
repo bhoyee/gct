@@ -9,6 +9,23 @@ $msg ='';
 $suc = '';
 
 ?>      
+    <style>
+        .loader {
+            border: 4px solid #f3f3f3; /* Light grey */
+            border-top: 4px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>  
+
 
 
 
@@ -70,255 +87,7 @@ $suc = '';
 
                         <div class="col-lg-8">
 
-                        <?php
-
-                    if(isset($_POST['button2'])){    //trigger button click
-
-                      $date = date('Y-m-d H:i:s');
-
-
-
-                      // $prcie = mysqli_real_escape_string($conn, $_POST['price']);
-
-
-
-                    $price = floatval($_POST['price']);
-                   // $tax = (6 * $price) / 100;
-                    $tprice = $price;
-
-                    $bnumb= $_POST['confNo'];
-
-                    $status = 'Paid';
-
-                    $chkConfNo = mysqli_query($conn, "select bookingCode from invoice where bookingCode = '$bnumb' and status = '$status' ");
-
-                    $records = mysqli_query($conn,"select boidata.fullName AS fName, book.email AS email, book.bookingCode as bcode from book INNER JOIN boidata ON book.userid=boidata.userid where book.bookingCode = '$bnumb'"); // fetch data from database
-
-                    if (mysqli_num_rows($chkConfNo) > 0){
-
-                      $msg = "Passanger Paid Already";
-
-
-
-                    } else if (mysqli_num_rows($records) > 0) {
-
-
-
-                      while($data = mysqli_fetch_array($records))
-
-                          {
-
-                            $fName = $data['fName'];
-
-                            $bookCode = $data['bcode'];
-
-                            $email = $data['email'];
-
-                            $_SESSION['bnumb'] = $bookCode;
-
-                            $status = "Paid";
-
-
-
-                            $getOldPrice = mysqli_query($conn,"select * from invoice where bookingCode = '$bnumb' and status = 'Unpaid' ORDER BY date DESC");
-
-                            mysqli_num_rows($getOldPrice);
-
-                            $pdata = mysqli_fetch_array($getOldPrice);
-
-                            $oldP = $pdata['price'];
-
-                           
-
-                            if($oldP == $price)
-                            {
-
-                                $date = date('Y-m-d H:i:s');
-
-                                 $invoice = "update invoice SET status ='$status', payDate='$date' WHERE bookingCode = $bookCode";
-
-
-
-                                 // $invoice = "insert into invoice (bookingCode, price , date, status) values ('$bookCode', '$price', '$date', '$status')";
-
-
-
-                                if(mysqli_query($conn, $invoice))
-                                {
-                                    //update book table
-                                    mysqli_query($conn, "UPDATE book SET paystatus = 'Paid' WHERE bookingCode ='$bookCode'") or die("database error: ". mysqli_error($conn));
-
-                                    //insert into stripe payment table
-                                    $trx_id = uniqid('in_');
-                                    $p_method = 'invoice';
-                                    $sta = 'Successed';
-                                    $insertTransactionSQL = "INSERT INTO stripe_payment(trx_id, bookingCode, fName, email, amt, status, p_date, ddate, pmethod)
-
-                                     VALUES('".$trx_id."','".$bookCode."','".$fName."','".$email."','".$tprice."','".$sta."','".$date."','".$date."','".$p_method."')";
-
-                                    mysqli_query($conn, $insertTransactionSQL) or die("database error: ". mysqli_error($conn));
-
-
-                                  // $msg = "Records added successfully.";
-
-                                    $getPrice = mysqli_query($conn,"select * from invoice where bookingCode = '$bnumb' and status = '$status' ORDER BY date DESC");
-
-
-
-                                        if (mysqli_num_rows($getPrice) > 0) 
-                                        {
-
-                                          while($price = mysqli_fetch_array($getPrice))
-
-                                            {
-
-                                                    $prize = $price['price'];
-
-
-
-                                                    $suc = "Paid Invoice sent successfully";
-
-                                                    $note = 'Click on the link '. 'http://www.google.com'.' to complete payment for your trip ';
-
-                                                    $adminNote = 'Kindly contact the customer to confirm that booking and send price quote';
-
-            
-
-                                                    $subject='GCT - Payment Paid Receipt';
-
-                                                    $subject2='GCT - Payment Paid Receipt';
-
-                                                    $fromEmail =$email;
-
-                                                    $cmail = 'support@giddycruisetransportation.com';
-
-                                                    $mailto =  $cmail;
-
-                                                
-
-                                                    $message = "Dear  Admin". "\n\n"
-
-                    
-
-                                                    . "You successfully sent Payment Paid Receipt to "."( ".$email. " )".". Find the details below " . "\n\n"
-
-                                                    
-
-                                                    . "Amount  Paid (Inc 6% Tax  : " . "\n". $prize ." USD"."\n\n"
-
-                                                    . "Customer Email : " . "\n" . $email . "\n\n"
-
-                                                    . "Booking Number : " . "\n" . $bookCode . "\n\n"
-
-                                                                                    
-
-                                                    . "Regards," . "\n" . "- System Support";
-
-                                                    
-
-                                                    //Message for client confirmation
-
-                                                    $message2 = "Dear Customer". "\n\n"
-
-                    
-
-                                                    . "Thank you for making reservation with us. Below is the Payment Paid Receipt for the trip!" . "\n\n"
-
-                                                
-                                                    . "Total Amount Paid (Inc 6% Tax)    : " . "\n". $prize . " USD". "\n\n"
-
-                                                    . "Customer Email : " . "\n" . $email . "\n\n"
-
-                                                    . "Booking Number : " . "\n" . $bookCode . "\n\n"
-
-                                                
-
-                                                    
-
-                                                    . "Regards," . "\n" . "- CS Diddy-Transport";
-
-                                                    
-
-                                                    //Email headers
-
-                                                    $headers = "From: " . $mailto; // Client email, I will receive
-
-                                                    $headers2 = "From: " . $mailto; // This will receive client
-
-                                                    
-
-                                                    //PHP mailer function
-
-                                                    
-
-                                                    mail($mailto, $subject, $message, $headers); // This email sent to My address
-
-                                                    mail($fromEmail, $subject2, $message2, $headers2); //This confirmation email to client
-
-                                                    
-
-                    
-
-                                                    ?>
-
-                                                    <div class="">
-
-
-
-                                                    <a href="invpdf.php" target="_blank">
-
-                                                        <button type="submit" name="button" class="btn btn-success"><i class="fa fa-sign-in"></i> Download Pdf Paid Invoice</button>
-
-
-
-                                                    </a>
-
-
-
-                                                    </div>
-
-                                                    <?php
-
-                                                }
-
-                                        }
-
-                                }
-                                else
-                                    {
-
-                                        $msg = "Something went wrong";
-
-                                }
-
-                            }else{
-
-                                $msg = "Price amount is different from Unpaid amount";
-
-
-
-                            }
-
-                            }
-
-                            } else {
-
-                                    $msg = "No Booking Found";
-
-                            }
-
-
-
-                    }
-
-
-
-
-
-                                        ?>
-
-                                        <?php mysqli_close($conn); // Close connection ?>
-
+                      
                             <p id='alert' style = "font-size:20px; font-weight:bold; text-align: center; color:#FF0000; margin-top:10px"><?php echo $msg; ?></p>
 
                             <p id='alert' style = "font-size:20px; font-weight:bold; text-align: center; color:#61b15a; margin-top:10px"><?php echo $suc; ?></p>
@@ -370,9 +139,19 @@ $suc = '';
                                                 <div class="mb-4">
                                                     <input type="number" name="price" class="form-control" placeholder="Price" required>
                                                 </div>
-                                                <button type="submit" name="submitInvoice" class="btn btn-primary">Submit</button>
+                                                                       <button type="submit" name="submitInvoice" class="btn btn-primary" onclick="showLoader()">Submit</button>
                                             </div>
                                         </form>
+                                        <div class="loader" id="loader" style="display: none;"></div>
+
+                                        <script>
+                                            function showLoader() {
+                                                // Add a delay of 500 milliseconds (half a second)
+                                                setTimeout(function() {
+                                                    document.getElementById('loader').style.display = 'block';
+                                                }, 500);
+                                            }
+                                        </script>
                                         <p id='alert' style="font-size:20px; font-weight:bold; text-align: center; color:#61b15a; margin-top:10px"></p>
                                     </div>
                                 </div>
