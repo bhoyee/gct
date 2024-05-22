@@ -326,78 +326,101 @@ $suc = '';
 
 
                             <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Generate Custom Paid Invoice</h4>
-                                <code class="card-title-desc">Custom Payment Invoice / Receipt for Trip.</code>
-                                <div>
-                                    <form action="" method="post"><br>
-                                        <span>Email</span>
-                                        <div class="mb-4">
-                                            <input type="text" name="email" id="email" class="form-control mb-2" placeholder="Enter Email" required>
-                                            <button type="button" class="btn btn-primary" id="searchEmail">Find Customer</button>
-                                        </div>
+                                <div class="card-body">
+                                    <h4 class="card-title">Generate Custom Paid Invoice</h4>
+                                    <code class="card-title-desc">Custom Payment Invoice / Receipt for Trip.</code>
+                                    <div>
+                                        <form action="submit_invoice.php" method="post"><br>
+                                            <span>Email</span>
+                                            <div class="mb-4">
+                                                <input type="text" name="email" id="email" class="form-control mb-2" placeholder="Enter Email" required>
+                                                <button type="button" class="btn btn-primary" id="searchEmail">Find Customer</button>
+                                            </div>
 
-                                        <div id="additionalFields" style="display: none;">
-                                            <span>Full Name</span>
-                                            <div class="mb-4">
-                                                <input type="text" name="fullName" id="fullName" class="form-control" readonly>
+                                            <div id="additionalFields" style="display: none;">
+                                                <span>Full Name</span>
+                                                <div class="mb-4">
+                                                    <input type="text" name="fullName" id="fullName" class="form-control" readonly>
+                                                </div>
+                                                <span>Booking Code</span>
+                                                <div class="mb-4">
+                                                    <input type="text" name="bookingCode" id="bookingCode" class="form-control" readonly>
+                                                </div>
+                                                <span>Transaction ID</span>
+                                                <div class="mb-4">
+                                                    <input type="text" name="trx_id" id="trx_id" class="form-control" readonly>
+                                                </div>
+                                                <span>Date of Trip</span>
+                                                <div class="mb-4">
+                                                    <input type="date" name="tripDate" class="form-control" required>
+                                                </div>
+                                                <span>Pick-up Address</span>
+                                                <div class="mb-4">
+                                                    <input type="text" name="pickupAddress" class="form-control" placeholder="Pick-up Address" required>
+                                                </div>
+                                                <span>Drop-off Address</span>
+                                                <div class="mb-4">
+                                                    <input type="text" name="dropoffAddress" class="form-control" placeholder="Drop-off Address" required>
+                                                </div>
+                                                <span>Invoice Date</span>
+                                                <div class="mb-4">
+                                                    <input type="date" name="invoiceDate" class="form-control" required>
+                                                </div>
+                                                <span>Price</span>
+                                                <div class="mb-4">
+                                                    <input type="number" name="price" class="form-control" placeholder="Price" required>
+                                                </div>
+                                                <button type="submit" name="submitInvoice" class="btn btn-primary">Submit</button>
                                             </div>
-                                            <span>Date of Trip</span>
-                                            <div class="mb-4">
-                                                <input type="date" name="tripDate" class="form-control" required>
-                                            </div>
-                                            <span>Pick-up Address</span>
-                                            <div class="mb-4">
-                                                <input type="text" name="pickupAddress" class="form-control" placeholder="Pick-up Address" required>
-                                            </div>
-                                            <span>Drop-off Address</span>
-                                            <div class="mb-4">
-                                                <input type="text" name="dropoffAddress" class="form-control" placeholder="Drop-off Address" required>
-                                            </div>
-                                            <span>Invoice Date</span>
-                                            <div class="mb-4">
-                                                <input type="date" name="invoiceDate" class="form-control" required>
-                                            </div>
-                                            <span>Price</span>
-                                            <div class="mb-4">
-                                                <input type="number" name="price" class="form-control" placeholder="Price" required>
-                                            </div>
-                                            <button type="submit" name="button2" class="btn btn-primary">Submit</button>
-                                        </div>
-                                    </form>
+                                        </form>
+                                        <p id='alert' style="font-size:20px; font-weight:bold; text-align: center; color:#61b15a; margin-top:10px"></p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-                        <script>
-                        $(document).ready(function(){
-                            $('#searchEmail').click(function(){
-                                var email = $('#email').val();
-                                $.ajax({
-                                    url: 'check_email.php',
-                                    method: 'POST',
-                                    data: { email: email },
-                                    success: function(response){
-                                        var data = JSON.parse(response);
-                                        if(data.status === 'found'){
-                                            $('#email').prop('readonly', true);
-                                            $('#fullName').val(data.fullName); // Set the full name in the input
-                                            $('#searchEmail').hide();
-                                            $('#additionalFields').show();
-                                        } else if (data.status === 'not_found') {
-                                            alert('No such email found');
-                                        } else {
-                                            alert('Query failed. Please try again. Error: ' + data.error);
-                                        }
-                                    },
-                                    error: function(xhr, status, error) {
-                                        alert('Error: ' + error);
+                            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+                            <script>
+                            $(document).ready(function(){
+                                function generateBookingCode() {
+                                    return 'CU-' + Math.floor(10000000 + Math.random() * 90000000);
+                                }
+
+                                function generateTransactionID() {
+                                    var chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                                    var result = 'tr-';
+                                    for (var i = 0; i < 16; i++) {
+                                        result += chars.charAt(Math.floor(Math.random() * chars.length));
                                     }
+                                    return result;
+                                }
+
+                                $('#searchEmail').click(function(){
+                                    var email = $('#email').val();
+                                    $.ajax({
+                                        url: 'check_email.php',
+                                        method: 'POST',
+                                        data: { email: email },
+                                        success: function(response){
+                                            var data = JSON.parse(response);
+                                            if(data.status === 'found'){
+                                                $('#email').prop('readonly', true);
+                                                $('#fullName').val(data.fullName); // Set the full name in the input
+                                                $('#bookingCode').val(generateBookingCode()); // Generate and set booking code
+                                                $('#trx_id').val(generateTransactionID()); // Generate and set transaction ID
+                                                $('#searchEmail').hide();
+                                                $('#additionalFields').show();
+                                            } else if (data.status === 'not_found') {
+                                                alert('No such email found');
+                                            } else {
+                                                alert('Query failed. Please try again. Error: ' + data.error);
+                                            }
+                                        },
+                                        error: function(xhr, status, error) {
+                                            alert('Error: ' + error);
+                                        }
+                                    });
                                 });
                             });
-                        });
-                        </script>
-
+                            </script>
 
                         </div>
 
