@@ -22,9 +22,9 @@ $stmt->execute();
 
 $rows=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
-echo "<pre>";
-print_r($rows);
-echo "</pre>";
+// echo "<pre>";
+// print_r($rows);
+// echo "</pre>";
 
 
 
@@ -717,4 +717,9 @@ $query= "Select SUM(price) as amount, EXTRACT(MONTH From `payDate`) AS Mon, EXTR
 </script>
 
 
+<?php 
+
+include('footer.php');
+
+?>
      
