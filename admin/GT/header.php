@@ -865,6 +865,7 @@
                                     <li><a href="quote.php">Send Unpaid Invoice</a></li>
 
                                     <li><a href="invoice.php">Send Paid Invoice</a></li>
+                                    <li><a href="c_paid_invoice.php">Send Custom Paid Invoice</a></li>
 
                                     <li><a href="salespdf.php" target="_blank">Today Total Sales</a></li>
 
