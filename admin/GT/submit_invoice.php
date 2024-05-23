@@ -57,9 +57,46 @@ if(isset($_POST['submitInvoice'])){
 
 
 
+    class PDF_Rotate extends \FPDF\FPDF {
+        var $angle = 0;
+    
+        function Rotate($angle, $x=-1, $y=-1)
+        {
+            if($x==-1)
+                $x=$this->x;
+            if($y==-1)
+                $y=$this->y;
+            if($this->angle!=0)
+                $this->_out('Q');
+            $this->angle=$angle;
+            if($angle!=0)
+            {
+                $angle*=M_PI/180;
+                $c=cos($angle);
+                $s=sin($angle);
+                $cx=$x*$this->k;
+                $cy=($this->h-$y)*$this->k;
+                $this->_out(sprintf('q %.5F %.5F %.5F %.5F %.2F %.2F cm 1 0 0 1 %.2F %.2F cm',$c,$s,-$s,$c,$cx,$cy,-$cx,-$cy));
+            }
+        }
+    
+        function _endpage() {
+            if ($this->angle != 0) {
+                $this->angle = 0;
+                $this->_out('Q');
+            }
+            parent::_endpage();
+        }
+    }
+
+
     if ($stmtInvoice->execute() && $stmtStripe->execute()) {
+
+
+        
         // Generate PDF invoice
-        $pdf = new \FPDF\FPDF();
+        $pdf = new PDF_Rotate();
+
         $pdf->AddPage();
     
         // Company logo
@@ -106,6 +143,15 @@ if(isset($_POST['submitInvoice'])){
         $pdf->SetY(200); // Position at 2 cm from bottom
         $pdf->SetFont('Arial', 'I', 8);
         $pdf->Cell(0, 10, 'www.giddycruisetransportation.com', 0, 0, 'C');
+
+
+
+            // Add watermark
+        $pdf->SetFont('Arial', 'B', 50);
+        $pdf->SetTextColor(230, 230, 230); // Light gray color
+        $pdf->Rotate(45,55,190);
+        $pdf->Text(55,190, 'Giddy Cruise Transport');
+        $pdf->Rotate(0); // Reset rotation
     
         // Save the PDF to a file
         $pdfFilePath = "invoices/invoice_$bookingCode.pdf";
