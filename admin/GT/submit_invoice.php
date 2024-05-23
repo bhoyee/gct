@@ -3,7 +3,7 @@ namespace FPDF;
 include("connect.php");
 
 require('vendor/fpdf/fpdf/src/Fpdf/Fpdf.php');
-
+// require('PDF.php');
 require 'vendor/autoload.php';
 
 // require_once 'vendor/fpdf/fpdf/src/Fpdf/Fpdf.php';
@@ -57,27 +57,60 @@ if(isset($_POST['submitInvoice'])){
 
 
 
-    if($stmtInvoice->execute() && $stmtStripe->execute()) {
-                // Generate PDF invoice
-                $pdf = new \FPDF\FPDF();
-                $pdf->AddPage();
-                $pdf->SetFont('Arial', 'B', 16);
-                $pdf->Cell(0, 10, 'Invoice', 0, 1, 'C');
-                $pdf->SetFont('Arial', '', 12);
-                $pdf->Cell(0, 10, "Booking Code: $bookingCode", 0, 1);
-                $pdf->Cell(0, 10, "Customer Name: $fullName", 0, 1);
-                $pdf->Cell(0, 10, "Email: $email", 0, 1);
-                $pdf->Cell(0, 10, "Trip Date: $tripDate", 0, 1);
-                $pdf->Cell(0, 10, "Pickup Address: $pickupAddress", 0, 1);
-                $pdf->Cell(0, 10, "Dropoff Address: $dropoffAddress", 0, 1);
-                $pdf->Cell(0, 10, "Invoice Date: $invoiceDate", 0, 1);
-                $pdf->Cell(0, 10, "Price: $$price", 0, 1);
-                $pdf->Cell(0, 10, "Tax: $$tax", 0, 1);
-                $pdf->Cell(0, 10, "Total Price: $amt", 0, 1);
-        
-                // Save the PDF to a file
-                $pdfFilePath = "invoices/invoice_$bookingCode.pdf";
-                $pdf->Output('F', $pdfFilePath);
+    if ($stmtInvoice->execute() && $stmtStripe->execute()) {
+        // Generate PDF invoice
+        $pdf = new \FPDF\FPDF();
+        $pdf->AddPage();
+    
+        // Company logo
+        $pdf->Image('gct_logo.png', 10, 10, 30); // Adjust the path and dimensions as needed
+    
+        // Company information header
+        $pdf->SetFont('Arial', 'B', 12);
+        $pdf->Cell(0, 10, 'Giddy Cruise Transportation', 0, 1, 'C');
+        $pdf->SetFont('Arial', '', 10);
+        $pdf->Cell(0, 6, '200 E Pratt St Suite 4100, Baltimore, MD 21202, USA', 0, 1, 'C');
+        $pdf->Cell(0, 6, 'Phone: +14432202654 , +14439855520', 0, 1, 'C');
+        $pdf->Cell(0, 6, 'Email: support@giddycruisetransportation.com', 0, 1, 'C');
+        $pdf->Ln(5); // Line break
+    
+        // Invoice title
+        $pdf->SetFont('Arial', 'B', 16);
+        $pdf->Cell(0, 10, 'Paid Invoice', 0, 1, 'C');
+        $pdf->Ln(10); // Line break
+    
+        // Invoice details table
+        $pdf->SetFont('Arial', '', 12);
+        $pdf->Cell(50, 10, 'Booking Number:', 0);
+        $pdf->Cell(0, 10, $bookingCode, 0, 1);
+        $pdf->Cell(50, 10, 'Customer Name:', 0);
+        $pdf->Cell(0, 10, $fullName, 0, 1);
+        $pdf->Cell(50, 10, 'Email:', 0);
+        $pdf->Cell(0, 10, $email, 0, 1);
+        $pdf->Cell(50, 10, 'Trip Date:', 0);
+        $pdf->Cell(0, 10, $tripDate, 0, 1);
+        $pdf->Cell(50, 10, 'Pickup Address:', 0);
+        $pdf->Cell(0, 10, $pickupAddress, 0, 1);
+        $pdf->Cell(50, 10, 'Dropoff Address:', 0);
+        $pdf->Cell(0, 10, $dropoffAddress, 0, 1);
+        $pdf->Cell(50, 10, 'Invoice Date:', 0);
+        $pdf->Cell(0, 10, $invoiceDate, 0, 1);
+        $pdf->Cell(50, 10, 'Price:', 0);
+        $pdf->Cell(0, 10, '$' . number_format($price, 2), 0, 1);
+        $pdf->Cell(50, 10, 'Tax(6%):', 0);
+        $pdf->Cell(0, 10, '$' . number_format($tax, 2), 0, 1);
+        $pdf->Cell(50, 10, 'Total Price:', 0);
+        $pdf->Cell(0, 10, '$' . number_format($amt, 2), 0, 1);
+    
+        // Add footer
+        $pdf->SetY(200); // Position at 2 cm from bottom
+        $pdf->SetFont('Arial', 'I', 8);
+        $pdf->Cell(0, 10, 'www.giddycruisetransportation.com', 0, 0, 'C');
+    
+        // Save the PDF to a file
+        $pdfFilePath = "invoices/invoice_$bookingCode.pdf";
+        $pdf->Output('F', $pdfFilePath);
+    
         
                 // Send email with PDF attachment
                 $mail = new PHPMailer(true);
@@ -123,6 +156,8 @@ if(isset($_POST['submitInvoice'])){
             $stmtInvoice->close();
             $stmtStripe->close();
             $conn->close();
+
+            
         }
         ?>
 
