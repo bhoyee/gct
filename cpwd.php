@@ -5,53 +5,61 @@ require 'partials/_functions.php';
 $conn = db_connect();
 
 if(!isset($_SESSION['email'])) {
-
    $script = "<script>
    window.location = 'index.php';</script>";
    echo $script;
    exit();
 }
+
 ?>
 
-
-    <div class="container page-content">
-        <h4 class="page-title pt30">Change Your GCT Account Password</h4>
-        <div>
+<div class="container page-content">
+    <h4 class="page-title pt30">Change Your GCT Account Password</h4>
+    <div>
         <?php
         if (isset($_POST['psend'])){
     
             $email =  $_SESSION['email'];
             $pwd  = trim($_POST["pwd"]);
-          
-            // $gender  = trim($_POST["gender"]);
-            // $location  = trim($_POST["location"]);
+            $pwd2 = trim($_POST["pwd2"]);
 
-                //update password on users table
-                $result = mysqli_query($conn, "UPDATE users SET pwd='$pwd' WHERE email ='$email'");
-
-              if($result){
-
-                echo '<div class="alert alert-success" role="alert">
-                <strong>Alert!</strong> Password change successfully.
+            // Check if passwords match
+            if ($pwd !== $pwd2) {
+                echo '<div class="alert alert-danger" role="alert">
+                <strong>Alert!</strong> Passwords do not match.
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
-            </div>';
+                </div>';
+                exit; // Stop further execution
+            }
 
-              }else{
+            // Hash the password
+            $pwd_hashed = password_hash($pwd, PASSWORD_DEFAULT);
+          
+            // Update password on users table
+            $stmt = $conn->prepare("UPDATE users SET pwd=? WHERE email =?");
+            $stmt->bind_param('ss', $pwd_hashed, $email);
+            $result = $stmt->execute();
+
+            if($result){
+                echo '<div class="alert alert-success" role="alert">
+                <strong>Alert!</strong> Password changed successfully.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                </div>';
+            }else{
                 echo '<div class="alert alert-danger" role="alert">
                 <strong>Alert!</strong> Something went wrong.
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
-            </div>';
-              }
-    
+                </div>';
+            }
         }
-      
-    
-?>
-        </div>
+        ?>
+    </div>
 <div class="row">
     <div class="col-md-8 col-sm-8">
         <h5 class="content-header">Change Password</h5>
@@ -105,7 +113,7 @@ if(!isset($_SESSION['email'])) {
                     <li>
                         <i class="fa fa-home pull-left"></i>
                         <div class="thumb-list-item-caption">
-                            <p class="thumb-list-item-title"><a>10 Cinnamon Cir, Randallstown, MD 21133, USA.</a></p>
+                            <p class="thumb-list-item-title"><a>200 E Pratt St Suite 4100, Baltimore, MD 21202, USA.</a></p>
                         </div>
                     </li>
                     <li>
