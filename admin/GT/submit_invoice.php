@@ -150,7 +150,7 @@ if(isset($_POST['submitInvoice'])){
             $mail->Host = 'mail.giddycruisetransportation.com'; // Set the SMTP server to send through
             $mail->SMTPAuth = true;
             $mail->Username = 'noreply@giddycruisetransportation.com'; // SMTP username
-            $mail->Password = 'Samaravictor@1'; // SMTP password
+            $mail->Password = 'xxxxxxxx'; // SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
             $mail->Port = 465;
     
